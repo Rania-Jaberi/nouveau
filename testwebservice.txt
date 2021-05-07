@@ -1,0 +1,173 @@
+package com.siga.constat.domain.resource;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.siga.constat.domain.assurence;
+import com.siga.constat.domain.repository.assuranceRepository;
+
+@Restcontroller
+public class Testwebservice2 {
+	
+@Autowired
+private assuranceRepository assu;
+
+@RequestMapping(path="/test-assurance",method=RequestMethod.POST)
+
+public String testWebserviceRequestParam(@RequestBody assurence Assurence ) {
+	return null;}
+
+
+
+	
+	@GetMapping("/test-assurance")
+	public List<assurence> getall()
+	{
+	return assu.findAll();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+package com.siga.constat.domain.resource;
+
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.siga.constat.domain.User;
+import com.siga.constat.domain.repository.UserRepository;
+/*
+@RestController // cette class est une class qui contient des fonctions qui exposent des webservice en mode REST 
+public class TestWebserviceResource {
+
+	
+	@Autowired // injection class et interface
+	private UserRepository repo; // repository qui contient la liste des fonctions prédéf (query JDBC )
+	
+	
+	
+	@RequestMapping(path="/test-web/{value2}/{value1}",method=RequestMethod.GET)
+	public Integer testWebserviceWithPathVariableUrl(@PathVariable(name="value1") Integer v1,@PathVariable(name="value2") Integer v2)  // fonction testwebservice : websevice REST en mode GET
+	{
+		return  v1+v2;
+	}
+	
+	@RequestMapping(path="/test-web-rp",method=RequestMethod.POST)
+	public Integer testWebserviceRequestParam( Integer v1,Integer v2)  // fonction testwebservice : websevice REST en mode GET
+	{
+		return  v1*v2;
+	}
+	
+	
+	@RequestMapping(path="/test-web-body",method=RequestMethod.POST)
+	public String testWebserviceRequestParam1(@RequestBody User user )  // fonction testwebservice : websevice REST en mode GET
+	{
+		
+		repo.save(user); // insert into constat_user (login,password) values (user.get ) ;
+		
+		System.out.print("user login : " + user.getLogin());
+		return "user found";
+	}
+	
+	@RequestMapping(path="/test-web-body",method=RequestMethod.POST)
+	public String testWebserviceRequestParam(@RequestBody User user )  // fonction testwebservice : websevice REST en mode GET
+	{
+		
+		repo.save(user); // insert into constat_user (login,password) values (user.get ) ;
+		
+		System.out.print("user login : " + user.getLogin());
+		return "user found";
+	}
+	*/
+
+import antlr.collections.List;
+	 
+
+
+@RestController // cette class est une class qui contient des fonctions qui exposent des webservice en mode REST
+public class TestWebserviceResource {
+
+
+private static final int Password = 0;
+@Autowired // injection class et interface
+private UserRepository repo; // repository qui contient la liste des fonctions prédéf (query JDBC )
+
+
+
+
+@RequestMapping(path="/test-web-body",method=RequestMethod.POST)
+public String testWebserviceRequestParam(@RequestBody User user )  // fonction testwebservice : websevice REST en mode GET
+{
+
+/*
+* String createBy (java) created_by
+*
+* set partie java : valeur : system
+*  traitement set date > 6 =1
+*                      <6 = 0
+* */
+
+user.setcreateBy("system");
+
+  if (      user.getPassword().length() >6)
+  {
+ user.setcheck(1);
+  }
+  else
+ user.setcheck(0);
+
+user.setDateCreation(LocalDateTime.now());
+
+repo.save(user); // insert into constat_user (login,password) values (user.get ) ;
+repo.
+System.out.print("user login : " + user.getLogin());
+return "user found";
+}
+
+
+
+@GetMapping("/tesst")
+public java.util.List<User> getall()
+{
+return repo.findAll();
+}
+
+
+}
+	 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+package com.siga.constat.domain.resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.siga.constat.domain.repository.UserRepository;
+
+@RestController
+public class TestWebservieRessource1 {
+	
+	
+	@Autowired
+	private assuranceRepository repo1;
+}
+
+@RequestMapping(path="/test-web/{value}/{value1}",method=RequestMethod.GET)
+public Integer testWebserviceWithPathVariableUrl(@PathVariable(name="value1") Integer v1,@PathVariable(name="value2") Integer v2)  // fonction testwebservice : websevice REST en mode GET
+{
+	return  v1+v2;
+}
